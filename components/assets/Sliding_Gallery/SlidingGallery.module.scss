@@ -1,0 +1,107 @@
+.gallery {
+  position: absolute;
+  width: 100vw; /* set width to full viewport width */
+  top: 0;
+  overflow: hidden; /* hide any overflow */
+  pointer-events: none;
+
+  @media (max-width: 768px) {
+      height:  250px;
+  }
+
+  @media (min-width: 768px) {
+      height:  50vh;
+  }
+
+  @media (min-width: 1024px) {
+    .gallery {
+      height:  50vh;
+    }
+  }
+
+  img {
+    position: absolute;
+    object-fit: cover;
+    bottom: 0;
+    left: -10%;
+    transform-origin: 50% 50%;
+    transform: translate(-50%, -50%);
+    transition: transform .5s ease-in-out;  
+    height: 100px;
+    width: 100px;
+    animation: curve 17.5s linear infinite;
+    pointer-events: auto;
+    
+    &:hover {
+      transform: translate(-50%) scale(1.5);
+      cursor: pointer;
+    }
+
+    &:not(:hover) {
+      animation-play-state: running;
+    }
+    
+    
+    @media screen and (min-width: 768px) {
+        height: 120px;
+        width: 120px;
+    }
+    
+    @media (min-width: 1024px) {
+        height: 150px;
+        width: 150px;
+
+    }
+  }
+}
+
+.gallery:hover img {
+  animation-play-state: paused;
+}
+
+@keyframes curve {
+  0% {
+    left: -10vw;
+    rotate: -17deg;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(120vw) rotate(17deg);
+  }
+}
+
+.gallery img:nth-child(2) {
+  animation-delay: 2.5s;
+}
+
+.gallery img:nth-child(3) {
+  animation-delay: 5s;
+}
+
+.gallery img:nth-child(4) {
+  animation-delay: 7.5s;
+}
+
+.gallery img:nth-child(5) {
+  animation-delay: 10s;
+}
+
+.gallery img:nth-child(6) {
+  animation-delay: 12.5s;
+}
+
+.gallery img:nth-child(7) {
+  animation-delay: 15s;
+}
+
+// .gallery img:nth-child(8) {
+//   animation-delay: 17.5s;
+// }
+
+// .gallery img:nth-child(9) {
+//   animation-delay: 20s;
+// }
+
+// .gallery img:nth-child(10) {
+//   animation-delay: 22.5s;
+// }
+

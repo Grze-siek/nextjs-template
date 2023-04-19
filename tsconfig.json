@@ -13,8 +13,24 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "snipcart.d.ts"
+  ],
+  "exclude": ["node_modules"],
+  "paths": {
+    "@/*": ["*"],
+    "@/components/*": ["components/*"],
+    "@/utils/*": ["utils/*"]
+  }
 }

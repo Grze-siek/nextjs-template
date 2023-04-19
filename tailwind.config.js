@@ -6,7 +6,18 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'light-color': 'var(--light-color)',
+        'darker-color': 'var(--darker-color)',
+        'darkred-color': 'var(--darkred-color)',
+      },
+    },
   },
-  plugins: [],
-}
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true }),
+    require('daisyui'),
+    require('@tailwindcss/line-clamp'),
+    require("tailwindcss-animation-delay/index"),
+  ],
+};
