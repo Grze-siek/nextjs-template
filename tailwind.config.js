@@ -18,6 +18,5 @@ module.exports = {
     require('tailwind-scrollbar')({ nocompatible: true }),
     require('daisyui'),
     require('@tailwindcss/line-clamp'),
-    require("tailwindcss-animation-delay/index"),
   ],
 };
