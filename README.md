@@ -1,27 +1,7 @@
-# Next.js + Tailwind CSS Example
+The Miso beauty salon website is a modern and user-friendly platform that was created using the latest technologies such as Next.js 13.2 and TypeScript. The website features a sleek and elegant design, with a color palette that reflects the brand's sophisticated and luxurious image.
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+One of the key features of the website is its integration with Sanity Studio, which acts as a backend for the site. This integration allows the website owner to easily and conveniently change the content on the website, including text, images, and products. This means that the website can be updated quickly and efficiently, without the need for any technical expertise. The sanity studio dashboard is available under /studio path.
 
-## Deploy your own
+The site also includes a powerful search function, powered by the Fuse search engine, which allows users to quickly and easily find the content they are looking for. Whether searching for a specific product, service, or piece of information, the search function provides accurate and relevant results.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+In addition to its content and search functions, the Miso beauty salon website also includes a shopping cart functionality, which allows users to add and remove products from their cart with ease. This functionality is powered by the Snipcart tool, which provides a secure and reliable payment gateway for online transactions.
