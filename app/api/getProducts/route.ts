@@ -4,6 +4,8 @@ import { groq } from 'next-sanity';
 import { NextResponse } from 'next/server';
 import { NextApiRequest } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextApiRequest) {
   try {
     const name =

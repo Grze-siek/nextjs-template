@@ -1,20 +1,14 @@
 import '../styles/globals.css';
 import Header from './header/Header';
 import Footer from '../components/Footer';
-import { SnipcartProvider } from 'use-snipcart';
-import { fetchProducts } from '../utils/fetchProducts';
-import { Product } from '../typings';
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const productsData: Promise<Product[]> = fetchProducts();
-  const data = await productsData;
   return (
     <html lang="en">
-
       <body>
         <script
           dangerouslySetInnerHTML={{
@@ -28,11 +22,10 @@ export default async function RootLayout({
           `,
           }}
         />
-        {/* <SnipcartProvider> */}
-        <Header data={data} />
+        {/* @ts-expect-error Server Component */}
+        <Header />
         {children}
         <Footer />
-        {/* </SnipcartProvider> */}
       </body>
     </html>
   );

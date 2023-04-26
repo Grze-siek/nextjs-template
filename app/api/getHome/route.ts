@@ -11,8 +11,6 @@ const query = groq`
 `;
 
 export async function GET(request: Request) {
-  const home: HomePage = await client!.fetch(query, {
-    next: { revalidate: 60 },
-  });
+  const home: HomePage = await client!.fetch(query);
   return NextResponse.json({ home });
 }
