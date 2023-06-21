@@ -9,14 +9,26 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Search from '../Search';
-import { Product } from '../../typings';
-import useReturnProductsNames from '../../hooks/useReturnProductsNames';
 
-type Props = {
-  productsData: Product[];
-};
+const navListItems = [
+  {
+    label: 'Masaż',
+    // icon: TbMassage,
+    link: '/masaz',
+  },
+  {
+    label: 'Fryzjer',
+    // icon: GiHairStrands,
+    link: '/fryzjer',
+  },
+  {
+    label: 'Zajęcia ruchowe',
+    // icon: MdSportsGymnastics,
+    link: '/zajecia_ruchowe',
+  },
+];
 
-function HeaderClient({ productsData }: Props) {
+function HeaderClient() {
   const router = useRouter();
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
@@ -52,8 +64,6 @@ function HeaderClient({ productsData }: Props) {
     }
     return false;
   };
-
-  const names = useReturnProductsNames({ productsData });
 
   return (
     <header
@@ -143,7 +153,7 @@ function HeaderClient({ productsData }: Props) {
                       'text-gray-500 hover:text-black cursor-pointer'
                     } ${!!pathMatchRoute('/') && 'text-[#B91C1C]'}`}
                   >
-                    About
+                    O nas
                   </label>
                 </li>
                 <li
@@ -163,7 +173,7 @@ function HeaderClient({ productsData }: Props) {
                         : 'text-[#B91C1C]'
                     }`}
                   >
-                    Products <MdKeyboardArrowDown />
+                    Usługi <MdKeyboardArrowDown />
                   </label>
                   <input
                     type="checkbox"
@@ -175,24 +185,22 @@ function HeaderClient({ productsData }: Props) {
                       [`${styles.submenu} shadow-md`]: true,
                     })}
                   >
-                    {names.length > 0 &&
-                      names.map((productName) => (
+                    {navListItems.length > 0 &&
+                      navListItems.map(({ label, link }) => (
                         <li
-                          key={productName}
+                          key={label}
                           className={cx([
                             `${styles.menuLink} active:text-[#B91C1C] ${
-                              !pathMatchRoute(`/product/${productName}`) &&
+                              !pathMatchRoute(`${link}`) &&
                               'text-gray-500 hover:text-black hover:bg-[#f5ebe0] cursor-pointer'
                             } ${
-                              !!pathMatchRoute(`/product/${productName}`) &&
+                              !!pathMatchRoute(`${link}`) &&
                               'text-[#B91C1C] bg-[#f5ebe0]'
                             }`,
                           ])}
-                          onClick={() =>
-                            navItemClick(`/product/${productName}`)
-                          }
+                          onClick={() => navItemClick(`${link}`)}
                         >
-                          {productName}
+                          {label}
                         </li>
                       ))}
                   </ul>

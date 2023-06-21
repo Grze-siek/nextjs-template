@@ -4,7 +4,6 @@ import { AiFillLock, AiFillStar } from 'react-icons/ai';
 import { GiCheckMark } from 'react-icons/gi';
 import { client, urlFor } from '../../../lib/sanity-client';
 import { fetchProduct } from '../../../utils/fetchProduct';
-import ProductButton from '../../../components/ProductButton';
 import type { Metadata } from 'next';
 
 type Params = {
@@ -50,7 +49,6 @@ async function productPage({ params }: Params) {
             <p className="text-2xl font-bold">${product?.price}</p>
             {product?.isAvailable ? (
               <>
-                <ProductButton product={product} />
                 <div>
                   <div className="flex space-x-2 items-center">
                     <AiFillLock className="text-black h-5 w-5" />{' '}

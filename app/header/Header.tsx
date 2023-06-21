@@ -1,10 +1,14 @@
-import HeaderClient from '../../components/HeaderCli/HeaderClient';
+import HeaderClient from '../../components/HeaderCli/Header';
 import { Product } from '../../typings';
-import { fetchProducts } from '../../utils/fetchProducts';
+// import { fetchProducts } from '../../utils/fetchProducts';
 
-async function Header() {
-  const productsData: Product[] = await fetchProducts();
-  return <HeaderClient productsData={productsData} />;
+function Header() {
+  // const productsData: Product[] = await fetchProducts();
+  return (
+    <>
+      <HeaderClient />
+    </>
+  );
 }
 
 export default Header;

@@ -3,7 +3,6 @@ import { HiOutlineArrowRight } from 'react-icons/hi';
 import { AiOutlineInstagram } from 'react-icons/ai';
 import { AiFillFacebook } from 'react-icons/ai';
 import { AiOutlineTwitter } from 'react-icons/ai';
-import AnimatedLetters from './AnimatedLetters';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -45,9 +44,7 @@ function Footer({}: Props) {
       <div className="mx-auto pt-8 md:pt-20 md:px-10 lg:px-0 lg:max-w-5xl xl:max-w-6xl">
         <div className="md:flex md:justify-between pb-6 md:pb-12 border-b border-b-gray-300">
           <div className="flex-col space-y-5 mx-auto md:mx-0 max-w-max md:max-w-min lg:max-w-[200px]">
-            <h3 className="text-xl font-bold text-left">
-              <AnimatedLetters text="Miso - Beauty Cinic" />
-            </h3>
+            <h3 className="text-xl font-bold text-left">Miso - Beauty Cinic</h3>
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1, y: [25, 0] }}
@@ -72,9 +69,7 @@ function Footer({}: Props) {
           </div>
 
           <div className="hidden md:flex md:flex-col space-y-5">
-            <h3 className="text-lg font-semibold text-left">
-              <AnimatedLetters text="About" delayTime={0.3} />
-            </h3>
+            <h3 className="text-lg font-semibold text-left">About</h3>
             <div className="flex-col space-y-4 text-sm text-gray-400 text-left">
               {aboutElements.map((aboutElement, index) => (
                 <motion.p
@@ -92,9 +87,7 @@ function Footer({}: Props) {
           </div>
 
           <div className="hidden md:flex md:flex-col space-y-5">
-            <h3 className="text-lg font-semibold text-left">
-              <AnimatedLetters text="Product" delayTime={0.5} />
-            </h3>
+            <h3 className="text-lg font-semibold text-left">Product</h3>
             <div className="flex-col space-y-4 text-sm text-gray-400 text-left">
               {productElements.map((productElement, index) => (
                 <motion.p
@@ -112,9 +105,7 @@ function Footer({}: Props) {
           </div>
 
           <div className="hidden md:flex md:flex-col space-y-5">
-            <h3 className="text-lg font-semibold text-left">
-              <AnimatedLetters text="Company" delayTime={0.7} />
-            </h3>
+            <h3 className="text-lg font-semibold text-left">Company</h3>
             <div className="flex-col space-y-4 text-sm text-gray-400 text-left">
               {companyElements.map((companyElement, index) => (
                 <motion.p
@@ -133,7 +124,7 @@ function Footer({}: Props) {
 
           <div className="flex flex-col space-y-5">
             <h3 className="hidden md:inline-block text-lg font-semibold text-center">
-              <AnimatedLetters text="Social media" delayTime={0.9} />
+              Social Media
             </h3>
             <div className="flex space-x-4 text-gray-400 items-center justify-evenly md:justify-between">
               <motion.div
