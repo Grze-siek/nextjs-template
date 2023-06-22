@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Navbar,
   Typography,
@@ -18,35 +18,50 @@ import { TbMassage } from 'react-icons/tb';
 import { GiHairStrands } from 'react-icons/gi';
 import { RiPsychotherapyLine } from 'react-icons/ri';
 import { MdSportsGymnastics } from 'react-icons/md';
-import { BsChevronDown } from 'react-icons/bs';
+import { BsChevronDown, BsHeartArrow } from 'react-icons/bs';
 import { HiBars2 } from 'react-icons/hi2';
-import { AiOutlineHome } from 'react-icons/ai';
+import { AiFillHome } from 'react-icons/ai';
+import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import HamburgerIcon from '../assets/hamburger-icon/HamburgerIcon';
 
 // nav list menu
 const zabiegiKosmetyczne = [
   {
     title: 'Zabiegi kosmetyczne na twarz',
-    link: '/zabiegi_kosmetyczene_na_twarz',
+    link: '/zabiegi_kosmetyczne/na_twarz',
   },
   {
     title: 'Stylizacja rzęs',
-    link: '/stylizacja_rzes',
+    link: '/zabiegi_kosmetyczne/stylizacja_rzes',
   },
   {
     title: 'Makijaz permamentny',
-    link: '/makijaz_permamentny',
+    link: '/zabiegi_kosmetyczne/makijaz_permamentny',
   },
   {
     title: 'Stylizacja paznokci',
-    link: '/stylizacja_paznokci',
+    link: '/zabiegi_kosmetyczne/stylizacja_paznokci',
   },
   {
     title: 'Depilacja woskiem',
-    link: '/depilacja_woskiem',
+    link: '/zabiegi_kosmetyczne/depilacja_woskiem',
   },
 ];
 
-function NavListMenu({ isNavbarTransparent }) {
+const navItemClick = (route) => {
+  const router = useRouter();
+  router.push(route);
+  setTimeout(() => {
+    hamburgerClick();
+  }, 200);
+};
+
+const hamburgerClick = () => {
+  setHamburgerOpen(!hamburgerOpen);
+};
+
+function NavListMenu({ isNavbarTransparent, pathMatchRoute }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isCollapseOpen, setIsCollapseOpen] = React.useState(false);
 
@@ -56,24 +71,38 @@ function NavListMenu({ isNavbarTransparent }) {
   };
 
   const renderItems = zabiegiKosmetyczne.map(({ title, link }) => (
-    <Typography as="a" href={link} key={title}>
-      <MenuItem className="font-medium hover:bg-[#ede6dd]">
-        <Typography variant="small" color="blue-gray" className="text-md">
-          {title}
-        </Typography>
-      </MenuItem>
-    </Typography>
+    <li
+      key={title}
+      className={`font-medium transition-colors group hover:bg-[#ede6dd] ${
+        pathMatchRoute(`${link}`) ? 'bg-[#ede6dd]' : 'cursor-pointer'
+      }`}
+      onClick={() => navItemClick(`${link}`)}
+    >
+      <Typography
+        as="div"
+        variant="small"
+        color="blue-gray"
+        className="text-md font-normal px-4 py-2"
+      >
+        <p className="flex items-center transition-all space-x-2">
+          <BsHeartArrow className="hidden duration-300 opacity-0 transition-opacity group-hover:inline-block group-hover:opacity-100" />
+          <span>{title}</span>
+        </p>
+      </Typography>
+    </li>
   ));
 
   return (
     <>
       <Menu open={isMenuOpen} handler={setIsMenuOpen}>
         <MenuHandler>
-          <Typography as="a" href="#" variant="small" className="font-normal">
+          <Typography as="div" variant="small" className="font-normal">
             <MenuItem
               {...triggers}
               className={`hidden font-medium items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full  transition-colors hoverEffect ${
-                isNavbarTransparent
+                pathMatchRoute(/^\/zabiegi_kosmetyczne\//)
+                  ? 'text-darker-color font-semibold after:bg-darker-color after:h-[2px] after:w-[100%]'
+                  : isNavbarTransparent
                   ? 'text-white after:bg-white'
                   : 'text-blue-gray-900 after:bg-[#1a202c]'
               }`}
@@ -83,7 +112,7 @@ function NavListMenu({ isNavbarTransparent }) {
               <BsChevronDown
                 strokeWidth={2}
                 className={`h-3 w-3 transition-transform ${
-                  isMenuOpen ? 'rotate-180' : ''
+                  isMenuOpen && 'rotate-180'
                 }`}
               />
             </MenuItem>
@@ -91,9 +120,9 @@ function NavListMenu({ isNavbarTransparent }) {
         </MenuHandler>
         <MenuList
           {...triggers}
-          className="hidden min-w-fit gap-3 overflow-visible z-50 lg:flex"
+          className="hidden w-64 overflow-visible z-50 p-0 focuse:outline-none lg:flex shadow-md"
         >
-          <ul className="flex w-full flex-col gap-1">{renderItems}</ul>
+          <ul className="flex w-full flex-col">{renderItems}</ul>
         </MenuList>
       </Menu>
       <MenuItem
@@ -141,7 +170,7 @@ const navListItems = [
   },
 ];
 
-function NavList({ isNavbarTransparent }) {
+function NavList({ isNavbarTransparent, pathMatchRoute }) {
   return (
     <ul className="mb-4 mt-2 flex text-lg font-medium flex-col gap-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       <Typography
@@ -153,16 +182,21 @@ function NavList({ isNavbarTransparent }) {
       >
         <MenuItem
           className={`flex min-w-full font-medium items-center gap-2 transition-colors hoverEffect ${
-            isNavbarTransparent
+            pathMatchRoute('/')
+              ? 'text-darker-color font-semibold after:bg-darker-color after:h-[2px] after:w-[100%]'
+              : isNavbarTransparent
               ? 'text-white after:bg-white'
               : 'text-blue-gray-900 after:bg-[#1a202c]'
           }`}
         >
-          <AiOutlineHome />
+          <AiFillHome />
           Home
         </MenuItem>
       </Typography>
-      <NavListMenu isNavbarTransparent={isNavbarTransparent} />
+      <NavListMenu
+        isNavbarTransparent={isNavbarTransparent}
+        pathMatchRoute={pathMatchRoute}
+      />
       {navListItems.map(({ label, icon, link }, key) => (
         <Typography
           key={label}
@@ -175,7 +209,9 @@ function NavList({ isNavbarTransparent }) {
           <MenuItem
             className={clsx(
               'flex min-w-full font-medium items-center gap-2 lg:rounded-full transition-colors hoverEffect',
-              isNavbarTransparent
+              pathMatchRoute(link)
+                ? 'text-darker-color font-semibold after:bg-darker-color after:h-[2px] after:w-[100%]'
+                : isNavbarTransparent
                 ? 'text-white after:bg-white'
                 : 'text-blue-gray-900 after:bg-[#1a202c]'
             )}
@@ -190,9 +226,23 @@ function NavList({ isNavbarTransparent }) {
 }
 
 export default function ComplexNavbar() {
-  const [isNavOpen, setIsNavOpen] = React.useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
-  const [isNavbarTransparent, setIsNavbarTransparent] = React.useState(true);
+  const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
+
+  const pathMatchRoute = (route) => {
+    const pathname = usePathname();
+    if (pathname !== null) {
+      if (typeof route === 'string') {
+        const fixedRoute = route.replace(/ /g, '%20');
+        return pathname === fixedRoute;
+      } else {
+        return route.test(pathname);
+      }
+    }
+    return false;
+  };
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -223,28 +273,36 @@ export default function ComplexNavbar() {
       }`}
     >
       <div className="mx-auto flex items-center justify-around">
-        <Typography
-          as="a"
+        <Link
           href="/"
           className="mr-4 ml-2 text-lg cursor-pointer py-1.5 font-medium"
         >
           Odnowa | studio urody & masażu
-        </Typography>
+        </Link>
         <div className="hidden lg:inline-block">
-          <NavList isNavbarTransparent={isNavbarTransparent} />
+          <NavList
+            isNavbarTransparent={isNavbarTransparent}
+            pathMatchRoute={pathMatchRoute}
+          />
         </div>
-        <IconButton
-          size="sm"
-          color="blue-gray"
-          variant="text"
-          onClick={toggleIsNavOpen}
-          className="ml-auto mr-2 lg:hidden"
-        >
-          <HiBars2 className="h-6 w-6" />
-        </IconButton>
+        <div className="ml-auto bg-black/50 p-2 mr-2 text-white lg:hidden">
+          <HamburgerIcon
+            onClick={toggleIsNavOpen}
+            hamburgerOpen={isNavOpen}
+            isNavbarTransparent={isNavbarTransparent}
+          />
+        </div>
       </div>
-      <Collapse open={isNavOpen} className="overflow-scroll">
-        <NavList isNavbarTransparent={isNavbarTransparent} />
+      <Collapse
+        open={isNavOpen}
+        className={`overflow-scroll transition-colors ${
+          isNavbarTransparent ? 'bg-black/70 backdrop-blur-sm' : 'bg-white/70'
+        }`}
+      >
+        <NavList
+          isNavbarTransparent={isNavbarTransparent}
+          pathMatchRoute={pathMatchRoute}
+        />
       </Collapse>
     </Navbar>
   );

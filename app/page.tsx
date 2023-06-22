@@ -3,7 +3,7 @@ import { fetchHome } from '../utils/fetchHome';
 import HomeClient from '../components/HomeClient';
 
 export const metadata = {
-  title: 'Miso - Beauty Salon',
+  title: 'Odnowa | Studio urody i masazu',
 };
 
 async function Home() {
