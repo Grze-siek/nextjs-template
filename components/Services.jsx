@@ -95,7 +95,13 @@ export default function ServicesTab() {
                 <Link href={link}>
                   <Button
                     variant="outlined"
-                    sx={{ color: brown[600], borderColor: brown[600] }}
+                    sx={{
+                      color: brown[600],
+                      borderColor: brown[600],
+                      hoveredColor: brown[500],
+                      borderColor: brown[600],
+                    }}
+                    className="hover:border-yellow-900"
                   >
                     Dowiedz się więcej
                   </Button>

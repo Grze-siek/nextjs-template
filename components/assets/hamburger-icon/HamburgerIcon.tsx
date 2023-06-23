@@ -17,12 +17,12 @@ function HamburgerIcon({ onClick, hamburgerOpen, isNavbarTransparent }: Props) {
       >
         <div
           className={`${styles.barOne} transition-colors ${
-            isNavbarTransparent ? 'bg-white' : 'bg-black'
+            isNavbarTransparent ? 'bg-darker-color' : 'bg-[#1a202c]'
           }`}
         ></div>
         <div
           className={`${styles.barTwo} transition-colors ${
-            isNavbarTransparent ? 'bg-white' : 'bg-black'
+            isNavbarTransparent ? 'bg-darker-color' : 'bg-[#1a202c]'
           }`}
         ></div>
       </div>

@@ -1,50 +1,35 @@
-import Link from 'next/link';
-export default function SectionTitle(props: any) {
+import { Dancing_Script, Open_Sans } from '@next/font/google';
+
+const dancingFont = Dancing_Script({
+  subsets: ['latin'],
+  weight: ['500'],
+});
+
+const subtitleFont = Open_Sans({
+  subsets: ['latin'],
+  weight: ['300'],
+});
+
+type Prop = {
+  sectionTitle: string;
+  sectionSubtitle: string;
+};
+
+export default function SectionTitle({ sectionTitle, sectionSubtitle }: Prop) {
   return (
-    <div className="relative">
-      <h1 className="font-bold text-center text-darker-color text-2xl pt-10 mb-5 mt-7">
-        {props.title}
-      </h1>
-      {/* conditional rendering of "Back to services button" */}
-      <Link
-        passHref={true}
-        scroll={false}
-        href={{
-          pathname: '/',
-          query: { id: 'services' },
-        }}
-        legacyBehavior
+    <div className="w-3/4 min-h-fit text-center md:w-2/4">
+      <h1
+        className={`mb-4 text-2xl md:text-4xl lg:text-6xl text-center capitalize text-black ${dancingFont.className}`}
       >
-        <a
-          style={{ fontSize: '1rem' }}
-          className={`text-color font-light italic text underline inline-block absolute bottom-0 cursor-pointer ${
-            props.showLink ? 'inline-block' : 'hidden'
-          }`}
-        >
-          <img
-            src="left.png"
-            className="w-3 inline-block mr-2"
-            alt="Go back to services"
-          />
-          <span>Back to services</span>
-        </a>
-      </Link>
-      <style jsx>
-        {`
-          @media (max-width: 415px) {
-            span {
-              display: none;
-            }
-            img {
-              margin-left: 25%;
-              margin-bottom: 0.5rem;
-            }
-            a {
-              width: 100%;
-            }
-          }
-        `}
-      </style>
+        {sectionTitle}
+      </h1>
+
+      <div className="h-[2px] rounded-full w-16 bg-darker-color mx-auto my-2" />
+      <p
+        className={`text-[#585858] text-center text-sm md:text-lg lowercase ${subtitleFont.className}`}
+      >
+        {sectionSubtitle}
+      </p>
     </div>
   );
 }

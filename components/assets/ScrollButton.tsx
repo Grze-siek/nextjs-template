@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import useDocumentScrollThrottled from '../../hooks/useDocumentScrollThrottled';
 import smoothscroll from 'smoothscroll-polyfill';

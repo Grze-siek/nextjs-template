@@ -1,69 +1,75 @@
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-  Avatar,
-} from '@material-tailwind/react';
-import { StarIcon } from '@heroicons/react/24/solid';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Image from 'next/image';
+import { Rating } from '@mui/material';
+
+const bull = (
+  <Box
+    component="span"
+    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+  >
+    •
+  </Box>
+);
 
 type Testimonial = {
-  duration: string;
-  title: string;
+  userName: string;
+  value: number;
+  date: string;
+  fromWhere: string;
+  description: string;
   image: string;
 };
 
 export default function TestimonialCard({
-  duration,
-  title,
+  userName,
+  value,
+  date,
+  fromWhere,
+  description,
   image,
-  setIsHoveringCard,
-}: Testimonial & {
-  setIsHoveringCard: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+}: Testimonial) {
   return (
-    <Card
-      onMouseEnter={() => setIsHoveringCard(false)}
-      onMouseLeave={() => setIsHoveringCard(true)}
-      color="transparent"
-      shadow={false}
-      className="w-full max-w-[26rem]"
-    >
-      <CardHeader
-        color="transparent"
-        floated={false}
-        shadow={false}
-        className="mx-0 flex items-center gap-4 pt-0 pb-8"
-      >
-        <Avatar
-          size="lg"
-          variant="circular"
-          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-          alt="candice wu"
-        />
-        <div className="flex w-full flex-col gap-0.5">
-          <div className="flex items-center justify-between">
-            <Typography variant="h5" color="blue-gray">
-              Candice Wu
-            </Typography>
-            <div className="5 flex items-center gap-0">
-              <StarIcon className="h-5 w-5 text-yellow-700" />
-              <StarIcon className="h-5 w-5 text-yellow-700" />
-              <StarIcon className="h-5 w-5 text-yellow-700" />
-              <StarIcon className="h-5 w-5 text-yellow-700" />
-              <StarIcon className="h-5 w-5 text-yellow-700" />
-            </div>
-          </div>
-          <Typography color="blue-gray">Frontend Lead @ Google</Typography>
-        </div>
-      </CardHeader>
-      <CardBody className="mb-6 p-0">
-        <Typography>
-          &quot;I found solution to all my design needs from Creative Tim. I use
-          them as a freelancer in my hobby projects for fun! And its really
-          affordable, very humble guys !!!&quot;
+    <Card className="bg-white flex-shrink-0 w-[20rem] h-[28rem] my-4 drop-shadow-xl rounded-2xl  overflow-hidden">
+      <CardContent className="flex flex-col justify-center py-14 px-12">
+        <Typography
+          variant="h5"
+          gutterBottom
+          className="relative text-center font-sans font-bold"
+        >
+          {userName}
+          <div className="absolute h-[1px] bg-black w-14 -translate-x-1/2 -bottom-2 left-1/2" />
         </Typography>
-      </CardBody>
+        <Rating
+          className="mx-auto my-4"
+          name="read-only size-large"
+          value={value}
+          readOnly
+        />
+        <Typography
+          variant="h5"
+          color="text.secondary"
+          component="div"
+          className="mb-4 text-xs font-semibold font-sans text-center"
+        >
+          {date} | {fromWhere}
+        </Typography>
+        <div className="h-[10rem] overflow-y-scroll">
+          <Typography
+            variant="h6"
+            component="div"
+            className="mb-4 text-base text-center overflow-y-auto"
+          >
+            {description}
+          </Typography>
+        </div>
+        <div className="relative mx-auto w-40 h-16 overflow-hidden object-cover block">
+          <Image src={image} fill={true} alt={fromWhere} />
+        </div>
+      </CardContent>
     </Card>
   );
 }
