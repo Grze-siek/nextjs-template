@@ -2,8 +2,19 @@
 import { Typography } from '@material-tailwind/react';
 import Image from 'next/image';
 import DiscountCarousel from './DiscountCarousel/DiscountCarousel';
+import { Dancing_Script, Open_Sans } from 'next/font/google';
 
 type Props = {};
+
+const dancingFont = Dancing_Script({
+  subsets: ['latin'],
+  weight: ['500'],
+});
+
+const subtitleFont = Open_Sans({
+  subsets: ['latin'],
+  weight: ['300'],
+});
 
 export default function LandingPanel({}: Props) {
   return (
@@ -15,16 +26,17 @@ export default function LandingPanel({}: Props) {
       />
       <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/50">
         <div className="w-3/4 min-h-fit text-center md:w-2/4">
-          <Typography
-            variant="h1"
-            color="white"
-            className="mb-4 text-3xl md:text-4xl lg:text-5xl font-sans"
+          <h1
+            className={`mb-4 text-3xl md:text-4xl dancingFont lg:text-6xl ${dancingFont.className}`}
           >
             Enjoy Exclusive Spa Center
-          </Typography>
-          <Typography variant="lead" color="white" className="mb-6 opacity-80">
+          </h1>
+          <div className="h-[2px] rounded-full w-16 bg-darker-color mx-auto my-2" />
+          <p
+            className={`subtitle-white text-lg tracking-wide ${subtitleFont.className}`}
+          >
             treat yourself to the beauty and health of our spas
-          </Typography>
+          </p>
           <DiscountCarousel />
         </div>
       </div>

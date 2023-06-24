@@ -9,7 +9,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="w-screen">
+      <body className="w-screen bg-gradient-to-r from-white to-stone-300">
         <Header />
         {children}
         <Footer />

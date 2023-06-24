@@ -2,7 +2,7 @@
 import { Typography } from '@material-tailwind/react';
 import Image from 'next/image';
 import React from 'react';
-import { Dancing_Script, Open_Sans } from '@next/font/google';
+import { Dancing_Script, Open_Sans } from 'next/font/google';
 
 type Props = {};
 
@@ -18,7 +18,7 @@ const subtitleFont = Open_Sans({
 
 export default function PageBanner({}: Props) {
   return (
-    <div className="relative h-[75vh] w-full">
+    <div className="relative h-[50vh] w-full">
       <Image
         src="https://images.unsplash.com/photo-1488345979593-09db0f85545f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
         alt="Welcome image"
