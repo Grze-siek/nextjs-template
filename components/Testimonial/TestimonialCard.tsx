@@ -5,6 +5,8 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import { Rating } from '@mui/material';
+import { Testimonial } from '../../typings';
+import { urlFor } from '../../lib/imageBuilder';
 
 const bull = (
   <Box
@@ -15,61 +17,55 @@ const bull = (
   </Box>
 );
 
-type Testimonial = {
-  userName: string;
-  value: number;
-  date: string;
-  fromWhere: string;
-  description: string;
-  image: string;
+type TestimonialType = {
+  testimonial: Testimonial;
 };
 
-export default function TestimonialCard({
-  userName,
-  value,
-  date,
-  fromWhere,
-  description,
-  image,
-}: Testimonial) {
+export default function TestimonialCard({ testimonial }: TestimonialType) {
   return (
-    <Card className="bg-white flex-shrink-0 w-[20rem] h-[28rem] my-4 drop-shadow-xl rounded-2xl  overflow-hidden">
-      <CardContent className="flex flex-col justify-center py-14 px-12">
-        <Typography
-          variant="h5"
-          gutterBottom
-          className="relative text-center font-sans font-bold"
-        >
-          {userName}
-          <div className="absolute h-[1px] bg-black w-14 -translate-x-1/2 -bottom-2 left-1/2" />
-        </Typography>
-        <Rating
-          className="mx-auto my-4"
-          name="read-only size-large"
-          value={value}
-          readOnly
-        />
-        <Typography
-          variant="h5"
-          color="text.secondary"
-          component="div"
-          className="mb-4 text-xs font-semibold font-sans text-center"
-        >
-          {date} | {fromWhere}
-        </Typography>
-        <div className="h-[10rem] overflow-y-scroll">
-          <Typography
-            variant="h6"
-            component="div"
-            className="mb-4 text-base text-center overflow-y-auto"
-          >
-            {description}
-          </Typography>
-        </div>
-        <div className="relative mx-auto w-40 h-16 overflow-hidden object-cover block">
-          <Image src={image} fill={true} alt={fromWhere} />
-        </div>
-      </CardContent>
-    </Card>
+    <>
+      {testimonial && (
+        <Card className="bg-white lg:flex-shrink-0 w-[16rem] h-[20rem] md:w-[18rem] md:h-[24rem] lg:w-[20rem] lg:h-[28rem] lg:my-4 drop-shadow-xl my-2 rounded-xl lg:rounded-2xl mx-auto  overflow-hidden">
+          <CardContent className="flex m-auto flex-col justify-center py-8 px-6 lg:py-14 lg:px-12">
+            <h5 className="relative text-base md:text-xl lg:text-2xl text-center font-sans font-bold mb-2 lg:mb-4">
+              {testimonial.userName}
+              <div className="absolute h-[1px] bg-black w-14 -translate-x-1/2 -bottom-2 left-1/2" />
+            </h5>
+            <Rating
+              className="mx-auto my-4"
+              name="read-only size-large"
+              value={testimonial.value}
+              readOnly
+            />
+            <Typography
+              variant="h5"
+              color="text.secondary"
+              component="div"
+              className="mb-4 text-xs font-semibold font-sans text-center"
+            >
+              {testimonial.date} | {testimonial.fromWhere}
+            </Typography>
+            <div className="h-[6rem] md-[8rem] lg:h-[10rem] overflow-y-scroll">
+              <Typography
+                variant="h6"
+                component="div"
+                className="mb-4 text-sm lg:text-base text-center overflow-y-auto"
+              >
+                {testimonial.description}
+              </Typography>
+            </div>
+            <div className="relative mx-auto w-full h-12 md:h-20 lg:h-24 overflow-hidden object-cover block">
+              <Image
+                src={urlFor(testimonial.image).url()}
+                fill={true}
+                style={{ objectFit: 'scale-down' }}
+                alt={testimonial.userName}
+                // alt={testimonial.fromWhere}
+              />
+            </div>
+          </CardContent>
+        </Card>
+      )}
+    </>
   );
 }

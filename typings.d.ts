@@ -14,37 +14,84 @@ interface Image {
   };
 }
 
-export interface Product extends SanityBody {
-  _key: string;
-  name: string;
-  image: string;
-  description?: string;
-  price?: number;
-  isAvailable?: boolean;
+export interface Home {
+  _type: 'home';
+  landingTitle: string;
+  landingSubtitle?: string;
+  landingImage: Image;
+  discounts: Discount[];
+  serviceSectionTitle: string;
+  serviceSectionSubtitle?: string;
+  servicesTab: ServiceTab[];
+  teamSectionTitle: string;
+  teamSectionSubtitle?: string;
+  team: Employee[];
+  testimonialSectionTitle: string;
+  testimonialSectionSubtitle?: string;
+  testimonials: Testimonial[];
+  contactSectionTitle: string;
+  contactSectionSubtitle?: string;
+  address: string;
+  openingHours: string;
+  openingHoursSathurday: string;
+  phoneNumber: string;
+}
+
+export interface Discount extends SanityBody {
+  _type: 'discount';
+  duration: string;
+  title: string;
+  image: Image;
+}
+
+export interface ServiceTab extends SanityBody {
+  _type: 'serviceTab';
+  title: string;
+  value: Slug;
+  image: Image;
+  description: string;
+  link: string;
+}
+
+export interface Slug {
+  _type: 'slug';
+  current: string;
 }
 
 export interface Employee extends SanityBody {
+  _type: 'employee';
   name: string;
+  position: string;
   description: string;
   image: Image;
 }
 
-export interface HomePage extends SanityBody {
-  landingTitle: string;
-  shortLandingDescription: string;
-  firstImage: Image;
-  secondImage: Image;
-  video: string;
-  aboutDescription: string;
-  aboutImages: Image[];
-  productDescription: string;
-  products: Product[];
-  lastSectionImages: Image[];
-  lastSectionDescription: string;
-  lastSectionSmallText: string;
+export interface Testimonial extends SanityBody {
+  _type: 'testimonial';
+  userName: string;
+  value: number;
+  date: string;
+  fromWhere: string;
+  description: string;
+  image: Image;
 }
 
-export interface AboutPage extends SanityBody {
+export interface Services {
+  title: string;
+  subtitle: string;
+  image: Image;
+  sectionTitle: string;
+  sectionSubtitle: string;
+  services: Service[];
+}
+
+export interface Service {
+  _id: string;
+  title: string;
+  price: string;
+  isDiscount: boolean;
+  priceAfterDiscount?: string;
   description: string;
-  team: Employee[];
+  image: Image[];
+  isPopular: boolean;
 }

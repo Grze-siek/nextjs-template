@@ -1,79 +1,85 @@
 'use client';
-import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import SectionTitle from '../SectionTitle';
+import { urlFor } from '../../lib/imageBuilder';
 import styles from './Team.module.css';
+import { Employee } from '../../typings';
+import { useEffect, useState } from 'react';
 
-export default function Team() {
+type TeamType = {
+  data: Employee[];
+};
+
+export default function Team({ data }: TeamType) {
+  const [columns, setColumns] = useState(3);
+  const [gap, setGap] = useState(50);
+  const [variant, setVariant] = useState<
+    'woven' | 'masonry' | 'quilted' | 'standard' | undefined
+  >('woven');
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth >= 960) {
+        setColumns(3); // Three columns for larger screens
+        setGap(50);
+        setVariant('woven');
+      } else if (screenWidth >= 450) {
+        setColumns(2); // Two columns for tablet screens
+        setGap(30);
+        setVariant('masonry');
+      } else {
+        setColumns(1); // One column for mobile screens
+        setGap(8);
+        setVariant('masonry');
+      }
+    };
+
+    // Call handleResize initially and add event listener
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
-    <div className="container mx-auto">
-      <SectionTitle title={'Poznaj nasz zespół'} />
+    <>
       <ImageList
-        sx={{ width: '100%', height: '100%' }}
-        variant="woven"
-        cols={3}
-        gap={20}
+        sx={{
+          width: '100%',
+          height: '100%',
+          minHeight: 'fit-content',
+          overflowY: 'hidden',
+        }}
+        variant={variant}
+        cols={columns}
+        gap={gap}
       >
-        {itemData?.map((item) => (
-          <ImageListItem key={item.img}>
+        {data?.map((item) => (
+          <ImageListItem key={item.image.asset._ref}>
             <div className={styles.wrapper}>
               <img
-                src={`${item.img}?w=161&fit=crop&auto=format`}
-                srcSet={`${item.img}?w=161&fit=crop&auto=format&dpr=2 2x`}
-                alt={item.title}
+                src={urlFor(item.image).url()}
+                alt={item.name}
                 loading="lazy"
-                className={styles.gray}
+                className={styles.blur}
               />
               <div
                 className={`${styles.content} ${styles.slideDown} space-y-2 flex flex-col`}
               >
-                <p className="text-left text-md">{item.title}</p>
-                <p className="text-left text-sm">{item.description}</p>
+                <p className="text-left text-md">
+                  {item.name} | {item.position}
+                </p>
+                <p className="text-left text-sm lg:text-base">
+                  {item.description}
+                </p>
               </div>
             </div>
           </ImageListItem>
         ))}
       </ImageList>
-    </div>
+    </>
   );
 }
-
-const itemData = [
-  {
-    img: 'https://images.unsplash.com/photo-1549388604-817d15aa0110',
-    title: 'Monika | Kosmetolog',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt deserunt tempora perferendis. Neque voluptatibus expedita repellendus voluptatem laudantium ipsa sit!',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3',
-    title: 'Jarek | Masazysta',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt deserunt tempora perferendis. Neque voluptatibus expedita repellendus voluptatem laudantium ipsa sit!',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6',
-    title: 'Pamela | Stylistka paznokci',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt deserunt tempora perferendis. Neque voluptatibus expedita repellendus voluptatem laudantium ipsa sit!',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1525097487452-6278ff080c31',
-    title: 'Ilona | Fryzjerka',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt deserunt tempora perferendis. Neque voluptatibus expedita repellendus voluptatem laudantium ipsa sit!',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1574180045827-681f8a1a9622',
-    title: 'Patrycja | Stylistka rzęs',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt deserunt tempora perferendis. Neque voluptatibus expedita repellendus voluptatem laudantium ipsa sit!',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-    title: 'Agnieszka | Fryzjer',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt deserunt tempora perferendis. Neque voluptatibus expedita repellendus voluptatem laudantium ipsa sit!',
-  },
-];

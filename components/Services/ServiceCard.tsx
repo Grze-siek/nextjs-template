@@ -10,13 +10,8 @@ import {
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState } from 'react';
-
-type Service = {
-  title: string;
-  price: string;
-  description: string;
-  images: string[];
-};
+import { urlFor } from '../../lib/imageBuilder';
+import { Image as SanityImage, Service } from '../../typings';
 
 const centerElementVariants: Variants = {
   initial: {
@@ -49,15 +44,14 @@ const backdropVariants: Variants = {
   },
 };
 
-export default function ServiceCard({
-  title,
-  price,
-  description,
-  images,
-}: Service) {
+type Props = {
+  service: Service;
+};
+
+export default function ServiceCard({ service }: Props) {
   const [isCentered, setIsCentered] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const slicedImages = images.slice(0, 3);
+  const slicedImages = service.image.slice(0, 3);
 
   const handleClick = () => {
     if (!isAnimating) {
@@ -108,7 +102,7 @@ export default function ServiceCard({
               isCentered ? 'text-2xl' : 'text-xl'
             }`}
           >
-            {title}
+            {service.title}
           </Typography>
 
           <Typography
@@ -119,7 +113,7 @@ export default function ServiceCard({
               isCentered ? 'text-xl' : 'text-lg'
             }`}
           >
-            {price} zł
+            {service.price}
           </Typography>
 
           {!isCentered ? (
@@ -130,19 +124,19 @@ export default function ServiceCard({
                   component="div"
                   className="mb-4 text-base text-center line-clamp-3"
                 >
-                  {description}
+                  {service.description}
                 </Typography>
               </div>
               <div className="flex justify-between">
-                {slicedImages.map((image, index) => (
+                {slicedImages.map((image: SanityImage) => (
                   <div
                     className="relative mx-auto rounded-md w-20 h-20 overflow-hidden object-cover block"
-                    key={index + image}
+                    key={image._key}
                   >
                     <Image
-                      src={image}
+                      src={urlFor(image).url()}
                       fill={true}
-                      alt={title}
+                      alt={service.title}
                       sizes="(max-width: 768px) 100%, (max-width: 1200px) 33%, 33%"
                     />
                   </div>
@@ -158,17 +152,23 @@ export default function ServiceCard({
               className="max-w-[100]"
             >
               <div>
-                <h3 className="mb-4 text-lg text-center">{description}</h3>
+                <h3 className="mb-4 text-lg text-center">
+                  {service.description}
+                </h3>
               </div>
               <ImageList
                 sx={{ width: '100%', maxHeight: 'fit-content' }}
                 cols={3}
                 rowHeight={164}
               >
-                {images.map((image, index) => (
-                  <ImageListItem key={index + image}>
+                {service.image.map((image: SanityImage) => (
+                  <ImageListItem key={image._key}>
                     <div className="relative mx-auto rounded-md w-40 h-40 overflow-hidden object-cover block">
-                      <Image src={image} fill={true} alt={title} />
+                      <Image
+                        src={urlFor(image).url()}
+                        fill={true}
+                        alt={service.title}
+                      />
                     </div>
                   </ImageListItem>
                 ))}
