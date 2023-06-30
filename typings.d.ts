@@ -42,6 +42,7 @@ export interface Discount extends SanityBody {
   duration: string;
   title: string;
   image: Image;
+  path: string;
 }
 
 export interface ServiceTab extends SanityBody {
@@ -91,7 +92,8 @@ export interface Service {
   price: string;
   isDiscount: boolean;
   priceAfterDiscount?: string;
+  durationOfService: string;
   description: string;
   image: Image[];
-  isPopular: boolean;
+  isPakiet: boolean;
 }

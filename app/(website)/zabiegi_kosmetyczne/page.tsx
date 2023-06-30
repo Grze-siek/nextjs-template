@@ -12,9 +12,13 @@ import PreviewSuspense from '../../../components/Preview/PreviewSuspense';
 const query = groq`
 *[_type == 'beauty'][0] {
   ...,
-  services[] -> {_id,title,price,isDiscount,priceAfterDiscount,description,isPopular,image},
+  services[] -> {_id,title,price,isDiscount,priceAfterDiscount,durationOfService,description,isPakiet,image},
 }
 `;
+
+export const metadata = {
+  title: 'Odnowa | Zabiegi kosmetyczne',
+};
 
 export default async function page() {
   if (previewData()) {

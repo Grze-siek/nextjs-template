@@ -14,7 +14,7 @@
   }
 
   .hoverEffect::after {
-    @apply content-[''] h-[1px] w-[0%] left-0 -top-2 rounded-xl absolute duration-300;
+    @apply content-[''] h-[2px] w-[0%] left-0 -top-2 rounded-xl absolute duration-300;
   }
 
   .hoverEffect:hover::after {

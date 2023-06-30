@@ -12,9 +12,13 @@ import PreviewSuspense from '../../../components/Preview/PreviewSuspense';
 const query = groq`
 *[_type == 'barber'][0] {
   ...,
-  services[] -> {_id,title,price,isDiscount,priceAfterDiscount,description,isPopular,image},
+  services[] -> {_id,title,price,isDiscount,priceAfterDiscount,durationOfService,description,isPakiet,image},
 }
 `;
+
+export const metadata = {
+  title: 'Odnowa | Fryzjer',
+};
 
 export default async function page() {
   if (previewData()) {

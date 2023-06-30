@@ -3,13 +3,10 @@ import { HiOutlineArrowRight } from 'react-icons/hi';
 import { AiOutlineInstagram } from 'react-icons/ai';
 import { AiFillFacebook } from 'react-icons/ai';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import Image from 'next/image';
 import { Divider } from '@mui/material';
-import { useRouter } from 'next/navigation';
 
 function Footer() {
-  const navigate = useRouter();
   return (
     <footer className="bg-light-color overflow-hidden">
       <div className="mx-auto pt-6 md:pt-12 px-4 md:px-10 lg:px-0 lg:max-w-5xl xl:max-w-6xl">
@@ -28,20 +25,29 @@ function Footer() {
               <h3>Wrocławska 31a, 55-040 Bielany Wrocławskie </h3>
             </div>
           </div>
-          <div className="hidden md:flex items-center space-x-4">
-            <div className="rounded-full border text-gray-800 cursor-pointer border-gray-800 p-2 transition-transform hover:scale-110">
-              <AiFillFacebook className="w-8 h-8" />
-            </div>
-            <a
-              target="_blank"
-              href="https://booksy.com/pl-pl/155907_studio-urody-i-masazu-odnowa_salon-kosmetyczny_15108_kobierzyce"
-            >
-              <div className="rounded-full p-2.5 border hover:scale-110 border-gray-800 transition-transform">
-                <div className="relative w-7 h-7 cursor-pointer">
-                  <Image fill src="/booksy.png" alt="Booksy" />
+
+          <div className="hidden md:flex flex-col justify-center items-center space-y-3">
+            <h3 className="text-md text-gray-500">Znajdziesz nas też:</h3>
+            <div className="flex items-center space-x-4">
+              <a
+                target="_blank"
+                href="https://www.facebook.com/odnowastudiourodyimasazu"
+              >
+                <div className="rounded-full border text-gray-800 cursor-pointer border-gray-800 p-2 transition-transform hover:scale-110">
+                  <AiFillFacebook className="w-8 h-8" />
                 </div>
-              </div>
-            </a>
+              </a>
+              <a
+                target="_blank"
+                href="https://booksy.com/pl-pl/155907_studio-urody-i-masazu-odnowa_salon-kosmetyczny_15108_kobierzyce"
+              >
+                <div className="rounded-full p-2.5 border hover:scale-110 border-gray-800 transition-transform">
+                  <div className="relative w-7 h-7 cursor-pointer">
+                    <Image fill src="/booksy.png" alt="Booksy" />
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
         <Divider />
@@ -89,9 +95,14 @@ function Footer() {
             <div className="h-[2px] w-8 bg-gray-500 rounded-full" />
           </motion.div>
           <div className="flex md:hidden mt-2 items-center space-x-4">
-            <div className=" text-gray-800 cursor-pointer border-gray-800 transition-transform hover:scale-110">
-              <AiFillFacebook className="w-[30px] h-[30px] " />
-            </div>
+            <a
+              target="_blank"
+              href="https://www.facebook.com/odnowastudiourodyimasazu"
+            >
+              <div className=" text-gray-800 cursor-pointer border-gray-800 transition-transform hover:scale-110">
+                <AiFillFacebook className="w-[30px] h-[30px] " />
+              </div>
+            </a>
             <a
               target="_blank"
               href="https://booksy.com/pl-pl/155907_studio-urody-i-masazu-odnowa_salon-kosmetyczny_15108_kobierzyce"

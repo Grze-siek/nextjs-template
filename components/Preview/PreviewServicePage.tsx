@@ -14,8 +14,11 @@ export default function PreviewServicePage({ query }: Props) {
   return (
     <main>
       <PageBanner data={data} />
-      <SectionTitle title={data.sectionTitle} subtitle={data.sectionSubtitle} />
-      <ServicesLayout data={data.services} />
+      <SectionTitle
+        title={data ? data.sectionTitle : ''}
+        subtitle={data ? data.sectionSubtitle : ''}
+      />
+      <ServicesLayout data={data ? data.services : null} />
     </main>
   );
 }

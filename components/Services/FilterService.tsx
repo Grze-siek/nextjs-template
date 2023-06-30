@@ -5,13 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { brown, grey } from '@mui/material/colors';
 import { Dispatch, SetStateAction } from 'react';
-import {
-  createTheme,
-  Theme,
-  ThemeProvider,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 type FilterServiceProps = {
   filterOption: number;
@@ -25,9 +19,10 @@ export default function FilterService({
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterOption(Number(event.target.value));
   };
+  const isDesktop = useMediaQuery('(min-width: 960px)');
 
   return (
-    <FormControl className="w-full mx-auto text-center mb-6">
+    <FormControl className="w-full mx-auto text-center">
       <FormLabel
         sx={{
           color: grey[900],
@@ -40,6 +35,7 @@ export default function FilterService({
         Wybierz to co cię interesuje:
       </FormLabel>
       <RadioGroup
+        row={isDesktop}
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="controlled-radio-buttons-group"
         className="mx-auto flex flex-col justify-center md:flex-row"
@@ -73,7 +69,7 @@ export default function FilterService({
               }}
             />
           }
-          label="Najbardziej popularne"
+          label="Pakiety"
         />
         <FormControlLabel
           value={3}

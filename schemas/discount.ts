@@ -23,6 +23,12 @@ export default defineType({
         hotspot: true,
       },
     }),
+    defineField({
+      name: 'path',
+      title:
+        'Podaj ściezkę do usługi ("/zabiegi_kosmetyczne", "/manicure&pedicure", "/masaz", "/fryzjer")',
+      type: 'string',
+    }),
   ],
   preview: {
     select: {

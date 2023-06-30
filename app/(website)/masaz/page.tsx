@@ -12,9 +12,13 @@ import PreviewServicePage from '../../../components/Preview/PreviewServicePage';
 const query = groq`
 *[_type == 'massage'][0] {
   ...,
-  services[] -> {_id,title,price,isDiscount,priceAfterDiscount,description,isPopular,image},
+  services[] -> {_id,title,price,isDiscount,priceAfterDiscount,durationOfService,description,isPakiet,image},
 }
 `;
+
+export const metadata = {
+  title: 'Odnowa | Masaż',
+};
 
 export default async function page() {
   if (previewData()) {
@@ -39,7 +43,7 @@ export default async function page() {
   const data: Services = await client.fetch(query);
 
   return (
-    <main>
+    <main className="overflow-hidden">
       <PageBanner data={data} />
       <SectionTitle title={data.sectionTitle} subtitle={data.sectionSubtitle} />
       <ServicesLayout data={data.services} />

@@ -26,6 +26,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'durationOfService',
+      title: 'Czas trwania usługi np. 1g',
+      type: 'string',
+    }),
+    defineField({
       name: 'description',
       title: 'Opis usługi',
       type: 'text',
@@ -37,8 +42,8 @@ export default defineType({
       of: [{ type: 'image' }],
     }),
     defineField({
-      name: 'isPopular',
-      title: 'Czy usługa jest popularna?',
+      name: 'isPakiet',
+      title: 'Czy usługa jest włączona w pakiet?',
       type: 'boolean',
     }),
   ],

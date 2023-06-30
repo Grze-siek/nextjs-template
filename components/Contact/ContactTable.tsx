@@ -11,8 +11,8 @@ type Props = {
 
 export default function ContactTable({ data }: Props) {
   return (
-    <div className="flex flex-col my-auto justify-start items-start p-5 flex-1">
-      <div className="flex flex-col text-gray-500 justify-start space-y-3 w-full">
+    <div className="flex flex-col my-auto justify-center items-center md:justify-start md:items-start p-5 flex-1">
+      <div className="flex flex-col text-gray-500 justify-center md:justify-start space-y-3 w-full">
         <div className="flex items-center space-x-4 border-b border-gray-300 pb-4">
           <MdPlace className="text-gray-500 h-8 w-8 transition-all hover:scale-125" />
           <p className="text-base md:text-lg lg:text-xl font-medium w-full">
@@ -35,7 +35,7 @@ export default function ContactTable({ data }: Props) {
         </div>
         <div className="flex items-center space-x-4 border-b border-gray-300 pb-4">
           <BsFillTelephoneFill className="text-gray-500 h-6 w-6 transition-all hover:scale-125" />
-          <p className="text-base md:text-lg lg:text-xlfont-medium ">
+          <p className="text-base md:text-lg lg:text-xl font-medium ">
             {data.phoneNumber}
           </p>
         </div>

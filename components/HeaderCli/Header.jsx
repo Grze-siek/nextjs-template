@@ -14,6 +14,7 @@ import { RiPsychotherapyLine } from 'react-icons/ri';
 import { AiFillHome } from 'react-icons/ai';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { AnimateSharedLayout, motion } from 'framer-motion';
 import HamburgerIcon from '../assets/hamburger-icon/HamburgerIcon';
 
 // // nav list menu
@@ -179,34 +180,60 @@ const navListItems = [
 
 function NavList({ isNavbarTransparent, pathMatchRoute }) {
   return (
-    <ul className="mb-4 mt-2 flex text-lg font-medium flex-col gap-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
-      {navListItems.map(({ label, icon, link }, key) => (
-        <Typography
-          key={label}
-          as="a"
-          href={link}
-          variant="small"
-          color="blue-gray"
-          className="font-normal max-w-fit"
-        >
-          <MenuItem
-            className={clsx(
-              'flex min-w-full font-medium items-center gap-1 lg:rounded-full transition-colors hoverEffect',
-              pathMatchRoute(link)
-                ? 'text-darker-color font-semibold after:bg-darker-color after:h-[2px] after:w-[100%]'
-                : isNavbarTransparent
-                ? 'text-white after:bg-white'
-                : 'text-blue-gray-900 after:bg-[#1a202c]'
-            )}
+    <AnimateSharedLayout>
+      <ul className="mb-4 mt-2 flex text-lg font-medium flex-col gap-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+        {navListItems.map(({ label, icon, link }) => (
+          <Link
+            href={link}
+            key={link}
+            className="font-normal text-base max-w-fit"
           >
-            {React.createElement(icon, { className: 'h-[18px] w-[18px]' })}{' '}
-            {label}
-          </MenuItem>
-        </Typography>
-      ))}
-    </ul>
+            <MenuItem
+              className={clsx(
+                'flex min-w-full font-medium items-center gap-1 lg:rounded-full transition-colors hoverEffect',
+                pathMatchRoute(link)
+                  ? 'text-darker-color font-semibold'
+                  : isNavbarTransparent
+                  ? 'text-white after:bg-white'
+                  : 'text-blue-gray-900 after:bg-[#1a202c]'
+              )}
+            >
+              <div className="flex gap-1 items-center relative">
+                {pathMatchRoute(link) && (
+                  <motion.span
+                    layoutId="upperline"
+                    className="absolute rounded-xl -top-2 left-0 block h-[2px] w-full bg-darker-color"
+                  />
+                )}
+                {React.createElement(icon, { className: 'h-[18px] w-[18px]' })}{' '}
+                {label}
+              </div>
+            </MenuItem>
+          </Link>
+        ))}
+      </ul>
+    </AnimateSharedLayout>
   );
 }
+
+const sentence = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 0.2,
+      staggerChildren: 0.04,
+    },
+  },
+};
+
+const letter = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
 
 export default function ComplexNavbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -246,6 +273,8 @@ export default function ComplexNavbar() {
     );
   }, []);
 
+  const pageTitle = 'Odnowa | studio urody & masażu';
+
   return (
     <Navbar
       className={`mx-auto fixed top-0 left-0 right-0 z-[100] rounded-none brightness-150 shadow-none p-2 md:p-3 lg:px-6 transition-colors duration-300 ease-in-out ${
@@ -259,7 +288,15 @@ export default function ComplexNavbar() {
           href="/"
           className="mr-4 ml-2 text-base md:text-lg cursor-pointer py-1.5 font-medium"
         >
-          Odnowa | studio urody & masażu
+          <motion.p variants={sentence} initial="hidden" animate="visible">
+            {pageTitle.split('').map((char, index) => {
+              return (
+                <motion.span key={char + '-' + index} variants={letter}>
+                  {char}
+                </motion.span>
+              );
+            })}
+          </motion.p>
         </Link>
         <div className="hidden lg:inline-block">
           <NavList
@@ -281,7 +318,7 @@ export default function ComplexNavbar() {
       </div>
       <Collapse
         open={isNavOpen}
-        className={`overflow-scroll pl-4 transition-colors ${
+        className={`overflow-scroll pl-4 pt-2 transition-colors ${
           isNavbarTransparent ? 'bg-black/70 backdrop-blur-sm' : 'bg-white/70'
         }`}
       >

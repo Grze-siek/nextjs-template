@@ -17,6 +17,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import useMediaQuery from '../hooks/useMediaQuery';
+import { BsChevronDown } from 'react-icons/bs';
+import { useState } from 'react';
 
 const SampleImageComponent = ({ value, isInline }) => {
   const { width, height } = getImageDimensions(value);
@@ -45,7 +47,18 @@ const components = {
 };
 
 export default function ServicesTab({ data }) {
+  const [isAccordionOpen, setIsAccordionOpen] = useState(
+    Array(data.length).fill(false)
+  );
   const isDesktop = useMediaQuery('(min-width: 960px)');
+
+  const toggleAccordion = (index) => {
+    setIsAccordionOpen((prevState) => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
+  };
   return (
     <>
       {isDesktop ? (
@@ -84,7 +97,7 @@ export default function ServicesTab({ data }) {
           >
             {data.map(({ _id, value, description, link }) => (
               <TabPanel key={_id} value={value.current} className="p-0">
-                <div className="flex bg-no-repeat bg-center bg-cover  bg-white flex-col items-center p-10">
+                <div className="flex bg-no-repeat bg-center bg-cover bg-white flex-col items-center p-10">
                   <PortableText value={description} components={components} />
                   <Link href={link} className="mt-4">
                     <Button
@@ -106,12 +119,13 @@ export default function ServicesTab({ data }) {
         </Tabs>
       ) : (
         <>
-          {data.map(({ _id, link, description, title, image }) => (
+          {data.map(({ _id, link, description, title, image }, index) => (
             <Accordion key={_id}>
               <AccordionSummary
+                onClick={() => toggleAccordion(index)}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
-                className="p-0 bg-light-color"
+                className="p-0 bg-gradient-to-b from-slate-100 to-light-color"
               >
                 <div className="w-full h-full flex flex-col items-center justify-center  rounded-t-md">
                   <div className="relative flex justify-center items-center mx-auto rounded-full w-36 h-36 object-cover mb-4 overflow-hidden">
@@ -122,8 +136,16 @@ export default function ServicesTab({ data }) {
                       className="mx-auto"
                     />
                   </div>
-                  <div className="text-md font-semibold uppercase text-center">
-                    {title}
+                  <div className="flex items-center space-x-2">
+                    <h1 className="text-md font-semibold uppercase text-center">
+                      {title}
+                    </h1>
+                    <BsChevronDown
+                      strokeWidth={2}
+                      className={`h-6 w-6 transition-transform duration-500 ${
+                        isAccordionOpen[index] ? 'rotate-180' : 'animate-pulse'
+                      }`}
+                    />
                   </div>
                 </div>
               </AccordionSummary>

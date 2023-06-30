@@ -27,7 +27,7 @@ const queryHome = groq`
 `;
 const queryDiscounts = groq`
 *[_type == 'home'][0] {
-  discounts[] -> {_id,duration,title,image},
+  discounts[] -> {_id,duration,title,image,path},
 }
 `;
 const queryServicesTab = groq`
@@ -74,13 +74,13 @@ async function Home() {
 
   const homeData: HomeType = await client.fetch(queryHome);
   const res = await client.fetch(queryDiscounts);
-  const DiscountsData: DiscountType = res.discounts;
+  const DiscountsData: DiscountType[] = res.discounts;
   const resu = await client.fetch(queryServicesTab);
   const serviceTabData: ServiceTabType = resu.servicesTab;
   const resul = await client.fetch(queryTeam);
   const teamData: EmployeeType[] = resul.team;
   const result = await client.fetch(queryTestimonials);
-  const testimonialsData: TestimonialType = result.testimonials;
+  const testimonialsData: TestimonialType[] = result.testimonials;
   return (
     <>
       <LandingPanel data={homeData} discountData={DiscountsData} />
@@ -106,7 +106,7 @@ async function Home() {
           />
           <Testimonials data={testimonialsData} />
         </div>
-        <div className="relative">
+        <div className="relative mx-auto container">
           <SectionTitle
             title={homeData.contactSectionTitle}
             subtitle={homeData.contactSectionSubtitle}

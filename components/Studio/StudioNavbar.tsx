@@ -3,12 +3,12 @@ import { RiArrowGoBackFill } from 'react-icons/ri';
 
 export default function StudioNavbar(props: any) {
   const handleExitPreview = async () => {
-    await fetch('/api/exit'); // Change the API endpoint path if needed
+    await fetch('/api/exit-preview'); // Change the API endpoint path if needed
   };
   return (
     <div>
       <div className="flex items-center justify-between p-5">
-        <Link href="/">
+        <Link href="/api/exit-preview">
           <div
             onClick={handleExitPreview}
             className="flex items-center rounded-sm transition-colors p-2 hover:bg-[#9b8670] space-x-2 text-red-800"
