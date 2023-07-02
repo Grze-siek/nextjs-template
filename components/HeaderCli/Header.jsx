@@ -1,11 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import {
-  Navbar,
-  Typography,
-  MenuItem,
-  Collapse,
-} from '@material-tailwind/react';
+import { Navbar, MenuItem, Collapse } from '@material-tailwind/react';
 import clsx from 'clsx';
 
 import { TbMassage } from 'react-icons/tb';
@@ -181,7 +176,7 @@ const navListItems = [
 function NavList({ isNavbarTransparent, pathMatchRoute }) {
   return (
     <AnimateSharedLayout>
-      <ul className="mb-4 mt-2 flex text-lg font-medium flex-col gap-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+      <ul className="my-4 flex text-lg font-medium flex-col gap-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
         {navListItems.map(({ label, icon, link }) => (
           <Link
             href={link}
@@ -266,12 +261,17 @@ export default function ComplexNavbar() {
     };
   }, []);
 
+  // React.useEffect(() => {
+  //   window.addEventListener(
+  //     'resize',
+  //     () => window.innerWidth >= 960 && setIsNavOpen(false)
+  //   );
+  // }, []);
+
+  const path = usePathname();
   React.useEffect(() => {
-    window.addEventListener(
-      'resize',
-      () => window.innerWidth >= 960 && setIsNavOpen(false)
-    );
-  }, []);
+    setIsNavOpen(false);
+  }, [path]);
 
   const pageTitle = 'Odnowa | studio urody & masażu';
 
@@ -318,7 +318,8 @@ export default function ComplexNavbar() {
       </div>
       <Collapse
         open={isNavOpen}
-        className={`overflow-scroll pl-4 pt-2 transition-colors ${
+        exit={{ height: 0, duration: 0.4, ease: 'easeIn' }}
+        className={`overflow-scroll pl-4 transition-colors ${
           isNavbarTransparent ? 'bg-black/70 backdrop-blur-sm' : 'bg-white/70'
         }`}
       >

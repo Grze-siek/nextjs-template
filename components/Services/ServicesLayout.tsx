@@ -1,12 +1,13 @@
 'use client';
 import { Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import FilterService from './FilterService';
 import ServiceCard from './ServiceCard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Service } from '../../typings';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import ModalCard from './ModalCard';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 type Props = {
   data: Service[];
@@ -16,10 +17,28 @@ export default function ServicesLayout({ data }: Props) {
   const [filterOption, setFilterOption] = useState(1);
   const [gridGap, setGridGap] = useState(2);
   const [selected, setSelected] = useState<Service | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const bodyRef = useRef<HTMLDivElement | null>(null);
 
   const isDesktop = useMediaQuery('(min-width: 960px)');
   const isTablet = useMediaQuery('(min-width: 768px)');
   const isSmartphone = useMediaQuery('(min-width: 600px)');
+
+  const handleOpenModal = (service: Service) => {
+    setSelected(service);
+    setModalOpen(true);
+    if (bodyRef.current) {
+      disableBodyScroll(bodyRef.current);
+    }
+  };
+
+  const handleCloseModal: any = () => {
+    setSelected(null);
+    setModalOpen(false);
+    if (bodyRef.current) {
+      enableBodyScroll(bodyRef.current);
+    }
+  };
 
   const filteredServices = () => {
     switch (filterOption) {
@@ -33,6 +52,14 @@ export default function ServicesLayout({ data }: Props) {
         return data;
     }
   };
+
+  useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [modalOpen]);
 
   useEffect(() => {
     const setGridGapValue = () => {
@@ -75,6 +102,7 @@ export default function ServicesLayout({ data }: Props) {
             width={'100%'}
             marginX="auto"
             alignContent="center"
+            ref={bodyRef}
             className="pb-10 pr-4 md:pr-6 lg:pr-10 mx-auto"
           >
             <AnimatePresence>
@@ -93,13 +121,16 @@ export default function ServicesLayout({ data }: Props) {
                     sm={6}
                     xs={12}
                   >
-                    <ServiceCard service={service} setSelected={setSelected} />
+                    <ServiceCard
+                      service={service}
+                      onClick={() => handleOpenModal(service)}
+                    />
                   </Grid>
                 );
               })}
             </AnimatePresence>
           </Grid>
-          <ModalCard selected={selected} setSelected={setSelected} />
+          <ModalCard selected={selected} handleCloseModal={handleCloseModal} />
         </>
       ) : (
         <motion.h3

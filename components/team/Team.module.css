@@ -23,8 +23,14 @@
 
 @media screen and (max-width: 768px) {
   .wrapper > .content {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     padding: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .wrapper > img.blur {
+    filter: blur(5px);
   }
 }
 
@@ -67,7 +73,7 @@
 }
 
 .wrapper > .content.slideDown {
-  transform: translateY(-100%);
+  transform: translateY(-120%);
 }
 .wrapper:hover > .content.slideDown {
   transform: translateY(0);

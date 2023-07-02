@@ -1,5 +1,4 @@
 'use client';
-import { HiOutlineArrowRight } from 'react-icons/hi';
 import { AiOutlineInstagram } from 'react-icons/ai';
 import { AiFillFacebook } from 'react-icons/ai';
 import { motion } from 'framer-motion';
@@ -12,11 +11,11 @@ function Footer() {
       <div className="mx-auto pt-6 md:pt-12 px-4 md:px-10 lg:px-0 lg:max-w-5xl xl:max-w-6xl">
         <div className="flex flex-col mb-4 md:flex-row justify-between items-center">
           <div className="flex items-center md:space-x-4">
-            <div className="relative h-40 w-40 object-cover">
+            <div className="relative h-40 w-40 bg-transparent object-cover">
               <Image
                 fill
                 style={{ objectFit: 'scale-down' }}
-                src="/logo.png"
+                src="/brand_logo_white.svg"
                 alt="Logo firmowe"
               />
             </div>
@@ -29,6 +28,11 @@ function Footer() {
           <div className="hidden md:flex flex-col justify-center items-center space-y-3">
             <h3 className="text-md text-gray-500">Znajdziesz nas też:</h3>
             <div className="flex items-center space-x-4">
+              <a target="_blank" href="#">
+                <div className="rounded-full border text-gray-800 cursor-pointer border-gray-800 p-2 transition-transform hover:scale-110">
+                  <AiOutlineInstagram className="w-8 h-8" />
+                </div>
+              </a>
               <a
                 target="_blank"
                 href="https://www.facebook.com/odnowastudiourodyimasazu"
@@ -95,11 +99,16 @@ function Footer() {
             <div className="h-[2px] w-8 bg-gray-500 rounded-full" />
           </motion.div>
           <div className="flex md:hidden mt-2 items-center space-x-4">
+            <a target="_blank" href="#">
+              <div className="text-gray-800 cursor-pointer border-gray-800 transition-transform hover:scale-110">
+                <AiOutlineInstagram className="w-[30px] h-[30px]" />
+              </div>
+            </a>
             <a
               target="_blank"
               href="https://www.facebook.com/odnowastudiourodyimasazu"
             >
-              <div className=" text-gray-800 cursor-pointer border-gray-800 transition-transform hover:scale-110">
+              <div className="text-gray-800 cursor-pointer border-gray-800 transition-transform hover:scale-110">
                 <AiFillFacebook className="w-[30px] h-[30px] " />
               </div>
             </a>

@@ -1,42 +1,37 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  ImageList,
-  ImageListItem,
-  Typography,
-} from '@mui/material';
+import { Button, ImageList, ImageListItem } from '@mui/material';
 import { brown } from '@mui/material/colors';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Dispatch, SetStateAction } from 'react';
+import { Ref, MouseEventHandler } from 'react';
 import { urlFor } from '../../lib/imageBuilder';
 import { Image as SanityImage, Service } from '../../typings';
 
 type Props = {
   selected: Service | null;
-  setSelected: Dispatch<SetStateAction<Service | null>>;
+  handleCloseModal: () => void;
 };
 
-export default function ModalCard({ selected, setSelected }: Props) {
+export default function ModalCard({ selected, handleCloseModal }: Props) {
   if (!selected) {
     return <></>;
   }
+
+  const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
+    e.stopPropagation();
+    handleCloseModal();
+  };
   return (
     <div
       className="backdrop fixed inset-0 bg-black/50 z-50 flex justify-center items-center"
-      onClick={(e) => {
-        e.stopPropagation();
-        setSelected(null);
-      }}
+      onClick={handleClick}
     >
       <motion.div
         transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}
         layoutId={`card-${selected._id}`}
-        onClick={() => setSelected(null)}
-        className="bg-white cursor-default w-full max-w-[700px] max-h-[400px] overflow-y-scroll mx-auto my-auto drop-shadow-xl rounded-2xl overflow-hidden"
+        onClick={handleClick}
+        className="bg-white flex justify-center items-center cursor-default max-w-full h-[400px] md:h-[350px] md:w-[500px] lg:h-[400px] lg:w-[700px] overflow-y-scroll mx-auto my-auto drop-shadow-xl rounded-2xl"
       >
-        <div className="flex flex-col justify-center py-10 px-8">
+        <div className="flex flex-col justify-start w-5/6 h-[350px] md:h-[300px] md:w-[450px] lg:h-[340px] lg:w-[640px] p-4 md:p-2 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-light-color overflow-y-auto">
           <h3 className="text-center font-sans font-bold text-2xl">
             {selected.title}
           </h3>

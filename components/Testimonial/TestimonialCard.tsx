@@ -40,7 +40,7 @@ export default function TestimonialCard({ testimonial }: TestimonialType) {
             <p className="mb-4 text-gray-500 text-xs font-semibold font-sans text-center">
               {testimonial.date} | {testimonial.fromWhere}
             </p>
-            <div className="h-[6rem] md-[8rem] lg:h-[10rem] overflow-y-scroll">
+            <div className="h-[6rem] md-[8rem] lg:h-[10rem] scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-light-color overflow-y-scroll">
               <h3 className="mb-4 text-sm lg:text-base text-center overflow-y-auto">
                 {testimonial.description}
               </h3>

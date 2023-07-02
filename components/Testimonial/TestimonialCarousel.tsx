@@ -64,6 +64,7 @@ const TestimonialCarousel = ({ data }: TestimonialsType) => {
           centerMode={true}
           showThumbs={false}
           showIndicators={false}
+          swipeScrollTolerance={20}
           centerSlidePercentage={centerSlidePercentage}
           renderArrowPrev={(onClickHandler, hasPrev, label) =>
             hasPrev && (

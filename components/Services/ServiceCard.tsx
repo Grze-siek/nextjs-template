@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography } from '@mui/material';
+import style from './ServiceCard.module.css';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
@@ -7,10 +7,10 @@ import { Image as SanityImage, Service } from '../../typings';
 
 type Props = {
   service: Service;
-  setSelected: Dispatch<SetStateAction<Service | null>>;
+  onClick: () => void;
 };
 
-export default function ServiceCard({ service, setSelected }: Props) {
+export default function ServiceCard({ service, onClick }: Props) {
   const slicedImages =
     service && service.image ? service.image.slice(0, 3) : null;
 
@@ -28,8 +28,8 @@ export default function ServiceCard({ service, setSelected }: Props) {
         scale: 0.95,
       }}
       initial={{ opacity: 0.7 }}
-      onClick={() => setSelected(service)}
-      className={`bg-white cursor-pointer mx-auto drop-shadow-xl rounded-2xl overflow-hidden`}
+      onClick={onClick}
+      className={`bg-white cursor-pointer mx-auto drop-shadow-xl rounded-2xl overflow-hidden ${style.noSelect}`}
     >
       <div className="flex flex-col justify-center py-10 px-8">
         {service && (
