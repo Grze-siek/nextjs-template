@@ -7,22 +7,22 @@ const matchPath = (schemaType: string) => {
       return `${
         process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'
       }/api/previewHome`;
-    case 'beauty':
-      return `${
-        process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'
-      }/api/previewBeauty`;
-    case 'manicure':
-      return `${
-        process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'
-      }/api/previewManicure`;
-    case 'massage':
-      return `${
-        process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'
-      }/api/previewMassage`;
-    case 'barber':
-      return `${
-        process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'
-      }/api/previewBarber`;
+    // case 'beauty':
+    //   return `${
+    //     process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'
+    //   }/api/previewBeauty`;
+    // case 'manicure':
+    //   return `${
+    //     process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'
+    //   }/api/previewManicure`;
+    // case 'massage':
+    //   return `${
+    //     process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'
+    //   }/api/previewMassage`;
+    // case 'barber':
+    //   return `${
+    //     process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'
+    //   }/api/previewBarber`;
     default:
       return `${
         process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'

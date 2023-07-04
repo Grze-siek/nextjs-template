@@ -13,8 +13,8 @@ const path = process.env.NEXT_PUBLIC_SANITY_PATH!;
 
 export default defineConfig({
   basePath: path,
-  name: 'Studio_urody_i_masazu_Odnowa',
-  title: 'Studio urody i masazu Odnowa',
+  name: 'name',
+  title: 'title',
   projectId,
   dataset,
 

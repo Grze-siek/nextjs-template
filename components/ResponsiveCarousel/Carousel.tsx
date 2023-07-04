@@ -1,24 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
-import TestimonialCard from './TestimonialCard';
+import TestimonialCard from './Card';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
-import { Testimonial } from '../../typings';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-type TestimonialsType = {
-  data: Testimonial[];
-};
-
-const TestimonialCarousel = ({ data }: TestimonialsType) => {
+const TestimonialCarousel = () => {
   const [centerSlidePercentage, setCenterSlidePercentage] = useState(25);
 
   useEffect(() => {
-    // const interpolateSmallScreen = (screenWidth: number) => {
-    //   if (screenWidth < 550) return 100;
-    //   else return 50;
-    // };
-
     const interpolate = (screenWidth: number) => {
       const x1 = 100; // x value corresponding to y = 450
       const x2 = 25; // x value corresponding to y = 960
@@ -91,8 +81,8 @@ const TestimonialCarousel = ({ data }: TestimonialsType) => {
             )
           }
         >
-          {data.map((testimonial, i) => (
-            <TestimonialCard key={i} testimonial={testimonial} />
+          {[1, 2, 3, 4].map((i) => (
+            <TestimonialCard key={i} />
           ))}
         </Carousel>
       </div>

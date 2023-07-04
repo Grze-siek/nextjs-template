@@ -1,6 +1,5 @@
 'use client';
 import Header from './header/Header';
-import Footer from '../../components/Footer';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
@@ -28,7 +27,6 @@ export default function RootLayout({
       >
         {children}
       </motion.main>
-      <Footer />
     </>
   );
 }
